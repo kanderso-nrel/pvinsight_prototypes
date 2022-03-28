@@ -25,7 +25,7 @@ def run(input_query: str, output_file: str, beam_args: List[str] = None) -> None
         )
 
         # Output the results into BigQuery table.
-        _ = capacity_estimates | "Write to Big Query" >> beam.io.WriteToText(
+        _ = capacity_estimates | "Write to text file" >> beam.io.WriteToText(
             output_file
         )
 
@@ -45,7 +45,7 @@ if __name__ == "__main__":
     args, beam_args = parser.parse_known_args()
 
     run(
-        input_query=args.input_subscription,
-        output_file=args.output_table,
+        input_query=args.input_query,
+        output_file=args.output_file,
         beam_args=beam_args,
     )
